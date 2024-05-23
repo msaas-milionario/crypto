@@ -98,7 +98,6 @@ export default function Page() {
                         <div className="grid grid-cols-3 gap-6">
                             {Object.keys(comparisons).map((coin, index) => (
                                 <>
-
                                     {comparisons[coin].buy.map((buy, buyIndex) => (
                                         comparisons[coin].sell.map((sell, sellIndex) => (
                                             <ComparisonBox

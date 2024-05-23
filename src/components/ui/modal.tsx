@@ -175,7 +175,7 @@ export function Modal({ buyBinance, buyKuCoin, buyMercadoBitcoin, buyOkX, sellBi
                 <div className="border-b border-zinc-400 px-1 py-4 flex flex-col gap-4">
 
                     {results.map((result, index) => (
-                        <div className="">
+                        <div className="" key={index}>
                             <div key={index} className="flex gap-4 items-center">
                                 <h4 className="text-blue-700">{result.buyExchange}</h4>
                                 <h4>X</h4>
