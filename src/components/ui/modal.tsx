@@ -121,7 +121,7 @@ export function Modal({ buyBinance, buyKuCoin, buyMercadoBitcoin, buyOkX, sellBi
             }
         }
 
-        await axios.post('http://localhost:3000/api/coins', JSON.stringify(data))
+        await axios.post('https://crypto-beige-three.vercel.app/api/coins', JSON.stringify(data))
             .then(res => {
                 if (res.status === 200) {
                     setLiberate(true)
