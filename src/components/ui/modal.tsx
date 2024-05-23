@@ -127,6 +127,7 @@ export function Modal({ buyBinance, buyKuCoin, buyMercadoBitcoin, buyOkX, sellBi
                 "Content-Type": "application/json"
             }
         })
+        await axios.post('http://localhost:3000/api/coins', JSON.stringify(data))
             .then(res => {
                 if (res.status === 200) {
                     setLiberate(true)

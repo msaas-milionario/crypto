@@ -9,15 +9,20 @@ const mercadobitcoin_valid_coins = ['CRV', 'REN']
 const kucoin_valid_coins = ['CRV-USDT', 'REN-USDT']
 
 async function getBinanceValues(cryptoName: string, type: 'buy' | 'sell') {
-    const binance_values = []
-    let response = await axios.get(`https://api.binance.com/api/v3/depth?symbol=${cryptoName}&limit=1`)
-    if (type === 'buy') {
-        binance_values.push(response.data.bids[0][0])
-    } else {
-        binance_values.push(response.data.asks[0][0])
-    }
+    try {
+        const binance_values = []
+        let response = await axios.get(`https://api.binance.com/api/v3/depth?symbol=${cryptoName}&limit=1`)
+        if (type === 'buy') {
+            binance_values.push(response.data.bids[0][0])
+        } else {
+            binance_values.push(response.data.asks[0][0])
+        }
 
-    return binance_values
+        return binance_values
+    }catch(e) {
+        console.log(e)
+        throw new Error()
+    }
 }
 async function getOKXValues(cryptoName: string, type: 'buy' | 'sell') {
     const okx_values = []
@@ -106,12 +111,12 @@ export async function POST(request: Request, context: any) {
 
     if (data.binance.buy) {
         binanceCoins = await getDataFromExchange('binance', 'buy')
-    } else if(data.binance.sell) {
+    } else if (data.binance.sell) {
         binanceCoins = await getDataFromExchange('binance', 'sell')
     }
     if (data.okx.buy) {
         okxCoins = await getDataFromExchange('okx', 'buy')
-    } else if(data.okx.sell) {
+    } else if (data.okx.sell) {
         okxCoins = await getDataFromExchange('okx', 'sell')
     }
     if (data.mercado_bitcoin.buy) {
