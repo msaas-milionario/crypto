@@ -3,10 +3,12 @@ import { NextRequest, NextResponse } from "next/server"
 
 const valid_coins = ['CRV-USDT', 'REN-USDT']
 
-const binance_valid_coins = ['CRVUSDT', 'RENUSDT']
-const okx_valid_coins = ['CRV-USDT', 'REN-USDT']
-const mercadobitcoin_valid_coins = ['CRV', 'REN']
-const kucoin_valid_coins = ['CRV-USDT', 'REN-USDT']
+const binance_valid_coins = ['CRVUSDT', 'RENUSDT', 'PSGUSDT', 'ACMUSDT', 'GALUSDT', 'BARUSDT', 'JUVUSDT', 'CITYUSDT', 'ASRUSDT', 'FORUSDT', 'ATMUSDT', 'OGUSDT']
+const okx_valid_coins = ['CRV-USDT', 'REN-USDT', 'MENGO-USDT', 'CITY-USDT', 'GAL-USDT', 'MENGO-USDT', 'POR-USDT', 'ACM-USDT', 'ARG-USDT', 'TRA-USDT']
+const mercadobitcoin_valid_coins = ['CRV', 'REN', 'GAL']
+const kucoin_valid_coins = ['CRV-USDT', 'REN-USDT', 'GAL-USDT']
+const bybit_valid_coins = ['RENUSDT', 'GALUSDT', 'OGUSDT']
+const gateio_valid_coins = ['REN_USDT', 'CRV_USDT', 'PSG_USDT', 'ACM_USDT', 'MENGO_USDT', 'POR_USDT', 'AFC_USDT', 'GAL_USDT', 'ALA_USDT', 'JUV_USDT', 'SCCP_USDT', 'CITY_USDT', 'GOZ_USDT', 'TRA_USDT', 'ARG_USDT', 'NAP_USDT', 'ASR_USDT', 'AM_USDT', 'INTER_USDT', 'ITA_USDT', 'ASM_USDT', 'FOR_USDT', 'IBFK_USDT', 'ATM_USDT', 'SPFC_USDT', 'OG_USDT', 'GALO_USDT', 'SAUBER_USDT',]
 
 async function getBinanceValues(cryptoName: string, type: 'buy' | 'sell') {
     try {
@@ -19,7 +21,7 @@ async function getBinanceValues(cryptoName: string, type: 'buy' | 'sell') {
         }
 
         return binance_values
-    }catch(e) {
+    } catch (e) {
         console.log(e)
         throw new Error()
     }
@@ -57,6 +59,31 @@ async function getKuCoinValues(cryptoName: string, type: 'buy' | 'sell') {
     }
 
     return ku_coin_values
+}
+async function getBybitValues(cryptoName: string, type: 'buy' | 'sell') {
+    const bybit_values = []
+    let response = await axios.get(`https://api.bybit.com/v2/public/tickers?symbol=${cryptoName}`)
+    // FAZER TRATAMENTO DE DADOS
+    if (type === 'buy') {
+        bybit_values.push(response.data.result[0].bid_price)
+    } else {
+        bybit_values.push(response.data.result[0].ask_price)
+    }
+
+    return bybit_values
+}
+async function getGateioValues(cryptoName: string, type: 'buy' | 'sell') {
+    const gateio_values = []
+    let response = await axios.get(`https://api.gateio.ws/api/v4/spot/tickers?currency_pair=${cryptoName}`)
+
+    // FAZER TRATAMENTO DE DADOS
+    if (type === 'buy') {
+        gateio_values.push(response.data[0].highest_bid)
+    } else {
+        gateio_values.push(response.data[0].lowest_ask)
+    }
+
+    return gateio_values
 }
 async function getDataFromExchange(exchange: string, type: 'buy' | 'sell') {
     const data: {}[] = []
@@ -97,6 +124,24 @@ async function getDataFromExchange(exchange: string, type: 'buy' | 'sell') {
                 value: responseKuCoin
             })
         }
+    } else if (exchange === 'gateio') {
+        for (let p of gateio_valid_coins) {
+            var responseGateio = await getGateioValues(p, type)
+            data.push({
+                coin: p,
+                type: type,
+                value: responseGateio
+            })
+        }
+    } else if (exchange === 'bybit') {
+        for (let p of bybit_valid_coins) {
+            var responseBybit = await getBybitValues(p, type)
+            data.push({
+                coin: p,
+                type: type,
+                value: responseBybit
+            })
+        }
     }
     return data
 }
@@ -108,6 +153,8 @@ export async function POST(request: Request, context: any) {
     let okxCoins
     let mercadobitcoin
     let kucoin
+    let bybit
+    let gateio
 
     if (data.binance.buy) {
         binanceCoins = await getDataFromExchange('binance', 'buy')
@@ -129,11 +176,23 @@ export async function POST(request: Request, context: any) {
     } else if (data.kuCoin.sell) {
         kucoin = await getDataFromExchange('kuCoin', 'sell')
     }
+    if (data.bybit.buy) {
+        bybit = await getDataFromExchange('bybit', 'buy')
+    } else if (data.bybit.sell) {
+        bybit = await getDataFromExchange('bybit', 'sell')
+    }
+    if (data.gateio.buy) {
+        gateio = await getDataFromExchange('gateio', 'buy')
+    } else if (data.gateio.sell) {
+        gateio = await getDataFromExchange('gateio', 'sell')
+    }
 
     return NextResponse.json({
         binance: binanceCoins,
         mercadoBitcoin: mercadobitcoin,
-        okxCoins: okxCoins,
-        kuCoin: kucoin
+        okx: okxCoins,
+        kuCoin: kucoin,
+        bybit: bybit,
+        gateio: gateio
     })
 }

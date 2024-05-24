@@ -1,4 +1,8 @@
+'use client'
+
 import Image from "next/image"
+import { useContext } from "react";
+import { modalOrderBookContext } from "../context/modal-order-book";
 
 interface Exchange {
     exchange: string;
@@ -14,6 +18,18 @@ interface ComparisonBoxProps {
 }
 
 export function ComparisonBox({ buyExchange, sellExchange, crypto, cryptoImagePath, spread }: ComparisonBoxProps) {
+    const { setIsActived, setOrderBook, isActived } = useContext(modalOrderBookContext)
+    
+    function openOrderBook() {
+        setIsActived(!isActived)
+        console.log(isActived)
+        setOrderBook({
+            token: crypto,
+            buyExchange: buyExchange.exchange,
+            sellExchange: sellExchange.exchange
+        })
+    }
+
     return (
         <div className="relative exchange-box rounded-xl flex flex-col gap-4 px-6">
             <div className="py-4 border-b border-b-zinc-100">
@@ -58,7 +74,10 @@ export function ComparisonBox({ buyExchange, sellExchange, crypto, cryptoImagePa
                 </div> */}
             </div>
             <div className="flex justify-center pb-4">
-                <button className="text-orange text-lg font-semibold">ORDER BOOK</button>
+                <button
+                    className="text-orange text-lg font-semibold"
+                    onClick={() => openOrderBook()}
+                >ORDER BOOK</button>
             </div>
         </div>
     )

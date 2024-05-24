@@ -6,6 +6,7 @@ import { AddBtn } from "@/components/ui/add-btn";
 import { ComparisonBox } from "@/components/ui/comparison-box";
 import { HeaderBuy, HeaderOperation, HeaderSell } from "@/components/ui/header";
 import { Modal } from "@/components/ui/modal";
+import { ModalOrderBook } from "@/components/ui/modal-order-book";
 import axios from "axios";
 import { FormEvent, useContext, useEffect, useState } from "react";
 
@@ -54,13 +55,18 @@ export default function Page() {
     const [buyOkX, setBuyOKX] = useState<boolean>(false)
     const [buyMercadoBitcoin, setBuyMercadoBitcoin] = useState<boolean>(false)
     const [buyKuCoin, setBuyBKucoin] = useState<boolean>(false)
+    const [buyBybit, setBuyBybit] = useState<boolean>(false)
+    const [buyGateio, setBuyGateio] = useState<boolean>(false)
 
     // Sell
     const [sellBinance, setSellBinance] = useState<boolean>(false)
     const [sellOkx, setSellOKX] = useState<boolean>(false)
     const [sellMercadoBitcoin, setSellMercadoBitcoin] = useState<boolean>(false)
     const [sellKuCoin, setSellBKucoin] = useState<boolean>(false)
+    const [sellBybit, setSellBybit] = useState<boolean>(false)
+    const [sellGateio, setSellGateio] = useState<boolean>(false)
 
+    const [loading, setLoading] = useState<boolean>(false)
     const [comparisons, setComparisons] = useState<ComparisonData>({});
 
     async function confirmOperation() {
@@ -69,12 +75,16 @@ export default function Page() {
         buyExchangesSum = buyKuCoin ? buyExchangesSum + 1 : buyExchangesSum
         buyExchangesSum = buyMercadoBitcoin ? buyExchangesSum + 1 : buyExchangesSum
         buyExchangesSum = buyOkX ? buyExchangesSum + 1 : buyExchangesSum
+        buyExchangesSum = buyBybit ? buyExchangesSum + 1 : buyExchangesSum
+        buyExchangesSum = buyGateio ? buyExchangesSum + 1 : buyExchangesSum
 
         let sellExchangeSum = 0
         sellExchangeSum = sellBinance ? sellExchangeSum + 1 : sellExchangeSum
         sellExchangeSum = sellKuCoin ? sellExchangeSum + 1 : sellExchangeSum
         sellExchangeSum = sellMercadoBitcoin ? sellExchangeSum + 1 : sellExchangeSum
         sellExchangeSum = sellOkx ? sellExchangeSum + 1 : sellExchangeSum
+        sellExchangeSum = sellBybit ? sellExchangeSum + 1 : sellExchangeSum
+        sellExchangeSum = sellGateio ? sellExchangeSum + 1 : sellExchangeSum
 
         if (buyExchangesSum === 0 || sellExchangeSum === 0) {
             setMessage("Selecione pelo menos 1 corretora de compra e 1 corretora de venda.")
@@ -88,7 +98,7 @@ export default function Page() {
 
     if (liberate) {
         return (
-            <div className="grid grid-cols-my min-h-[524px] overflow-y-scroll">
+            <div className="grid grid-cols-my min-h-[524px] overflosw-y-scroll">
                 <Navbar />
                 <div className="border-l border-zinc-100 px-4 col-span-2">
                     <div className="flex flex-col gap-4">
@@ -203,6 +213,38 @@ export default function Page() {
                                     cryptoText="KuCoin"
                                 />
                             </div>
+                            <div className={`${sellBybit && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
+                                <label htmlFor="buy-bybit" className={`absolute left-0 top-0 h-full w-full z-50 ${sellBybit && 'cursor-not-allowed pointer-events-none'}`}>
+                                    <input
+                                        checked={buyBybit}
+                                        onChange={() => setBuyBybit(!buyBybit)}
+                                        name="buy-bybit"
+                                        type="checkbox"
+                                        id="buy-bybit"
+                                        className="absolute right-2 top-2"
+                                    />
+                                </label>
+                                <AddBtn
+                                    imagePath="bybit"
+                                    cryptoText="ByBit"
+                                />
+                            </div>
+                            <div className={`${sellGateio && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
+                                <label htmlFor="buy-gateio" className={`absolute left-0 top-0 h-full w-full z-50 ${sellGateio && 'cursor-not-allowed pointer-events-none'}`}>
+                                    <input
+                                        checked={buyGateio}
+                                        onChange={() => setBuyGateio(!buyGateio)}
+                                        name="buy-gateio"
+                                        type="checkbox"
+                                        id="buy-gateio"
+                                        className="absolute right-2 top-2"
+                                    />
+                                </label>
+                                <AddBtn
+                                    imagePath="gateio"
+                                    cryptoText="Gateio"
+                                />
+                            </div>
                         </div>
                         {message.length > 0 && (
                             <div className="w-full bg-red-950/40 border border-red-950/90 rounded-lg p-4">
@@ -279,6 +321,38 @@ export default function Page() {
                                     cryptoText="KuCoin"
                                 />
                             </div>
+                            <div className={`${buyBybit && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
+                                <label htmlFor="sell-bybit" className={`absolute left-0 top-0 h-full w-full z-50 ${buyBybit && 'cursor-not-allowed pointer-events-none'}`}>
+                                    <input
+                                        checked={sellBybit}
+                                        onChange={() => setSellBybit(!sellBybit)}
+                                        name="sell-bybit"
+                                        type="checkbox"
+                                        id="sell-bybit"
+                                        className="absolute right-2 top-2"
+                                    />
+                                </label>
+                                <AddBtn
+                                    imagePath="bybit"
+                                    cryptoText="ByBit"
+                                />
+                            </div>
+                            <div className={`${buyGateio && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
+                                <label htmlFor="sell-gateio" className={`absolute left-0 top-0 h-full w-full z-50 ${buyGateio && 'cursor-not-allowed pointer-events-none'}`}>
+                                    <input
+                                        checked={sellGateio}
+                                        onChange={() => setSellGateio(!sellGateio)}
+                                        name="sell-gateio"
+                                        type="checkbox"
+                                        id="sell-gateio"
+                                        className="absolute right-2 top-2"
+                                    />
+                                </label>
+                                <AddBtn
+                                    imagePath="gateio"
+                                    cryptoText="Gateio"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -291,7 +365,13 @@ export default function Page() {
                     sellKuCoin={sellKuCoin}
                     sellMercadoBitcoin={sellMercadoBitcoin}
                     sellOkX={sellOkx}
+                    buyBybit={buyBybit}
+                    buyGateio={buyGateio}
+                    sellBybit={sellBybit}
+                    sellGateio={sellGateio}
                     liberate={liberate}
+                    loading={loading}
+                    setLoading={setLoading}
                     setLiberate={setLiberate}
                     setComparisons={setComparisons}
                 />

@@ -10,7 +10,7 @@
         @apply w-72 outline-none bg-[#363636] border border-zinc-500 rounded-full py-1 ps-10 text-zinc-200
     }
     .add-btn {
-        @apply bg-orange text-white font-semibold py-2 rounded text-center px-12
+        @apply bg-orange text-white font-semibold py-2 rounded text-center xl:px-12 px-4 xl:text-base text-sm
     }
 }
 
