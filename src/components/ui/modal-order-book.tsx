@@ -22,9 +22,8 @@ export function ModalOrderBook() {
             exchange = orderBook.sellExchange
         }
 
-        await axios.post('https://crypto-beige-three.vercel.app/api/get-order-book', JSON.stringify({ exchange, type: type === 'buy' ? 'sell' : 'buy', crypto: orderBook.token }))
+        await axios.post('http://localhost:3000/api/get-order-book', JSON.stringify({ exchange, type: type === 'buy' ? 'sell' : 'buy', crypto: orderBook.token }))
             .then(res => {
-                console.log(res.data)
                 if (type === 'buy') {
                     setBuyOrderBook(res.data.orderBook)
                 } else {
@@ -110,7 +109,7 @@ export function ModalOrderBook() {
                     <div className="relative flex flex-col h-[204px]">
                         {currentOrderBook.length > 0 ? (
                             <>
-                                {currentOrderBook.slice(0, 5).map((item, index) => (
+                                {currentOrderBook.slice(0,5).map((item, index) => (
                                     <div key={index} className={`grid grid-cols-3 px-4 py-2 text-center text-zinc-400 ${index % 2 === 0 && 'bg-zinc-700 border-y border-zinc-600'}`}>
                                         <p>$ {Number(item[0]).toFixed(2)}</p>
                                         <p>{Math.round(item[1]).toLocaleString('pt-br')}</p>

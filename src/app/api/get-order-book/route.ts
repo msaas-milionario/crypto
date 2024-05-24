@@ -47,9 +47,9 @@ async function getOKXValues(cryptoName: string, type: 'buy' | 'sell') {
         const binance_values = []
         let response = await axios.get(`https://www.okx.com/api/v5/market/books?instId=${cryptoName}&sz=10`)
         if (type === 'buy') {
-            binance_values.push(response.data.data[0].bids[0] && response.data.data[0].bids[0][0])
+            binance_values.push(response.data.data[0].bids.slice(0,5))
         } else {
-            binance_values.push(response.data.data[0].asks[0] && response.data.data[0].asks[0][0])
+            binance_values.push(response.data.data[0].asks.slice(0,5))
         }
 
         return binance_values
@@ -116,7 +116,6 @@ function getCorrectCrypto(exchange: string, crypto: string) {
 export async function POST(request: Request, context: any) {
 
     const data = await request.json()
-    console.log(data)
     let orderBook = []
 
     if (data.exchange === 'binance') {
@@ -197,8 +196,6 @@ export async function POST(request: Request, context: any) {
             orderBook = await getGateioValues(gateio_valid_coins[correctCrypto], 'buy')
         }
     }
-
-    // console.log(orderBook)
 
     return NextResponse.json({
         orderBook: orderBook[0]
