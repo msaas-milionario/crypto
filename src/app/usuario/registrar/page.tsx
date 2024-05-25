@@ -6,8 +6,8 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import axios from "axios";
-import { useState } from "react";
-import { setCookie } from "nookies";
+import { useEffect, useState } from "react";
+import { parseCookies, setCookie } from "nookies";
 import { useRouter } from "next/navigation";
 
 const registerSchema = z.object({
@@ -47,6 +47,14 @@ export default function Page() {
                 router.push("/app/dash")
         }).catch(e => console.log(e))
     }
+
+    useEffect(() => {
+        const { arbitfy } = parseCookies()
+        if (typeof arbitfy !== 'undefined') {
+            router.push("/app/dash")
+            return
+        }
+    }, [])
 
     return (
         <form

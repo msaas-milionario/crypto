@@ -6,9 +6,9 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { setCookie } from 'nookies'
+import { parseCookies, setCookie } from 'nookies'
 
 const loginSchema = z.object({
     email: z.string().email('Formato de email inválido'),
@@ -48,6 +48,17 @@ export default function Page() {
 
             }).catch(e => console.log(e))
     }
+
+    const [loading, setLoading] = useState<boolean>(true)
+
+    useEffect(() => {
+        const { arbitfy } = parseCookies()
+        if (typeof arbitfy !== 'undefined') {
+            router.push("/app/dash")
+            return
+        }
+        setLoading(false)
+    }, [])
 
     return (
         <form
