@@ -49,15 +49,12 @@ export default function Page() {
             }).catch(e => console.log(e))
     }
 
-    const [loading, setLoading] = useState<boolean>(true)
-
     useEffect(() => {
         const { arbitfy } = parseCookies()
         if (typeof arbitfy !== 'undefined') {
             router.push("/app/dash")
             return
         }
-        setLoading(false)
     }, [])
 
     return (
