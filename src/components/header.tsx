@@ -10,7 +10,7 @@ export function Header() {
     useEffect(() => {
         const { arbitfy } = parseCookies()
         setName(JSON.parse(arbitfy).name)
-    })
+    }, [])
 
     return (
         <div className="w-full flex justify-between items-center mt-12">
