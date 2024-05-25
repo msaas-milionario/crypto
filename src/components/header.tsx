@@ -9,7 +9,9 @@ export function Header() {
 
     useEffect(() => {
         const { arbitfy } = parseCookies()
-        setName(JSON.parse(arbitfy).name)
+        if (typeof arbitfy !== 'undefined') {
+            setName(JSON.parse(arbitfy).name)
+        }
     }, [])
 
     return (
