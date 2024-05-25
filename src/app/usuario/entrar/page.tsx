@@ -26,6 +26,7 @@ export default function Page() {
     })
 
     async function formSubmited(data: loginSchemaType) {
+        setLoading(true)
         setError('')
         await axios.post('https://crypto-ivory-beta.vercel.app/api/login', data, {
             headers: {
@@ -35,6 +36,7 @@ export default function Page() {
         })
             .then(res => {
                 const response = res.data
+                setLoading(false)
 
                 if (response.error) {
                     setError(response.error)
