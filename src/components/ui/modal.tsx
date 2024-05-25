@@ -146,6 +146,7 @@ export function Modal({ buyBinance, loading, setLoading, buyKuCoin, buyMercadoBi
         //     }
         // })
         document.querySelector("#black-bg")?.classList.add('pointer-events-none')
+        // https://crypto-ivory-beta.vercel.app
         await axios.post('https://crypto-ivory-beta.vercel.app/api/coins', JSON.stringify(data))
             .then(res => {
                 if (res.status === 200) {
@@ -158,6 +159,7 @@ export function Modal({ buyBinance, loading, setLoading, buyKuCoin, buyMercadoBi
                 }
             }).catch(e => {
                 setError('Erro. Tente novamente mais tarde.')
+                document.querySelector("#black-bg")?.classList.remove('pointer-events-none')
                 setTimeout(() => {
                     setLoading(false)
                 }, 3000)
