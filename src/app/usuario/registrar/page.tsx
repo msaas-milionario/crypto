@@ -27,7 +27,7 @@ export default function Page() {
 
     async function formSubmited(data: registerSchemaType) {
         setError('')
-        await axios.post('http://localhost:3000/api/register', data, {
+        await axios.post('https://crypto-beige-three.vercel.app/api/register', data, {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json"

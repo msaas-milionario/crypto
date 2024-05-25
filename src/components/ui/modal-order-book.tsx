@@ -22,7 +22,7 @@ export function ModalOrderBook() {
             exchange = orderBook.sellExchange
         }
 
-        await axios.post('http://localhost:3000/api/get-order-book', JSON.stringify({ exchange, type: type === 'buy' ? 'sell' : 'buy', crypto: orderBook.token }))
+        await axios.post('https://crypto-beige-three.vercel.app/api/get-order-book', JSON.stringify({ exchange, type: type === 'buy' ? 'sell' : 'buy', crypto: orderBook.token }))
             .then(res => {
                 if (type === 'buy') {
                     setBuyOrderBook(res.data.orderBook)
