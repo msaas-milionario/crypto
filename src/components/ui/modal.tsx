@@ -147,7 +147,7 @@ export function Modal({ buyBinance, loading, setLoading, buyKuCoin, buyMercadoBi
         // })
         document.querySelector("#black-bg")?.classList.add('pointer-events-none')
         // https://crypto-ivory-beta.vercel.app
-        await axios.post('https://crypto-ivory-beta.vercel.app/api/coins', JSON.stringify(data))
+        await axios.post('https://crypto-jade-nine.vercel.app/api/coins', JSON.stringify(data))
             .then(res => {
                 if (res.status === 200) {
                     setLiberate(true)

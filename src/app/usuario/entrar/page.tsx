@@ -29,7 +29,7 @@ export default function Page() {
         setLoading(true)
         setError('')
         // 
-        await axios.post('https://crypto-ivory-beta.vercel.app/api/login', data, {
+        await axios.post('https://crypto-jade-nine.vercel.app/api/login', data, {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
