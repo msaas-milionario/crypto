@@ -2,6 +2,7 @@ import { ExchangeProvider } from "@/components/context/exchange";
 import { ModalOrderBookProvider } from "@/components/context/modal-order-book";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { Loading } from "@/components/loading";
 import { ModalOrderBook } from "@/components/ui/modal-order-book";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
@@ -33,6 +34,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                     <ModalOrderBook />
                 </ExchangeProvider>
             </ModalOrderBookProvider>
+            <Loading />
         </div >
     )
 }

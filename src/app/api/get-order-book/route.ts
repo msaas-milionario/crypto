@@ -84,7 +84,6 @@ async function getBybitValues(cryptoName: string, type: 'buy' | 'sell') {
         response.data.result.map((item: { symbol: string, price: string, side: string, size: number}) => item.side === 'Sell' ? array.push([item.price, `${item.size}`]) : '')
         bybit_values.push(array.slice(0, 10))
     }
-    console.log(bybit_values)
     return bybit_values
 }
 
@@ -176,7 +175,6 @@ export async function POST(request: Request, context: any) {
     if (data.exchange === 'bybit') {
         let correctCrypto = 0
         correctCrypto = getCorrectCrypto(data.exchange, data.crypto)
-        console.log(bybit_valid_coins[correctCrypto])
         if (data.type === 'buy') {
             // Puxar order book de venda da data.crypto
             orderBook = await getBybitValues(bybit_valid_coins[correctCrypto], 'sell')
