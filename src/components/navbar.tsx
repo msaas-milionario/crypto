@@ -6,7 +6,7 @@ export function Navbar() {
             <div className="flex flex-col gap-16 px-8">
                 <ul className="flex flex-col gap-12">
                     <NavLink
-                        href="/dash"
+                        href="/app/dash"
                         imagePath="dash"
                     >Dashboard</NavLink>
                     <NavLink
