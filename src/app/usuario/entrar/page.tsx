@@ -9,6 +9,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { parseCookies, setCookie } from 'nookies'
+import Link from "next/link";
 
 const loginSchema = z.object({
     email: z.string().email('Formato de email inválido'),
@@ -102,6 +103,7 @@ export default function Page() {
                         </svg>
                     ) : <span>Entrar</span>}
                 </button>
+                <Link href="/usuario/registrar" className="text-orange text-sm text-center"><span className="text-white">Ainda não possui uma conta?</span> Clique aqui</Link>
                 <p className="text-red-400 text-center">{error}</p>
             </div>
         </form>

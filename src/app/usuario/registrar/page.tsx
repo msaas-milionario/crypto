@@ -9,6 +9,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { parseCookies, setCookie } from "nookies";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const registerSchema = z.object({
     name: z.string(),
@@ -109,6 +110,7 @@ export default function Page() {
                         </svg>
                     ) : <span>Criar conta</span>}
                 </button>
+                <Link href="/usuario/registrar" className="text-orange text-sm text-center"><span className="text-white">Já possui uma conta?</span> Clique aqui</Link>
                 <p className="text-red-400 text-center">{error}</p>
             </div>
         </form>
