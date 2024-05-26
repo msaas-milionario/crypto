@@ -110,7 +110,7 @@ export default function Page() {
                         </svg>
                     ) : <span>Criar conta</span>}
                 </button>
-                <Link href="/usuario/registrar" className="text-orange text-sm text-center"><span className="text-white">Já possui uma conta?</span> Clique aqui</Link>
+                <Link href="/usuario/entrar" className="text-orange text-sm text-center"><span className="text-white">Já possui uma conta?</span> Clique aqui</Link>
                 <p className="text-red-400 text-center">{error}</p>
             </div>
         </form>
