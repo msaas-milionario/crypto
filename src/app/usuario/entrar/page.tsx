@@ -29,7 +29,7 @@ export default function Page() {
     async function formSubmited(data: loginSchemaType) {
         setLoading(true)
         setError('')
-        // 
+        // https://crypto-jade-nine.vercel.app
         await axios.post('https://crypto-jade-nine.vercel.app/api/login', data, {
             headers: {
                 "Content-Type": "application/json",

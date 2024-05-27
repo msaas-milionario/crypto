@@ -3,8 +3,7 @@ import { NextRequest, NextResponse } from "next/server"
 
 const valid_coins = ['CRV-USDT', 'REN-USDT']
 
-// const binance_valid_coins = ['CRVUSDT', 'RENUSDT', 'PSGUSDT', 'ACMUSDT', 'GALUSDT', 'BARUSDT', 'JUVUSDT', 'CITYUSDT', 'ASRUSDT', 'FORUSDT', 'ATMUSDT', 'OGUSDT']
-const binance_valid_coins = ['CRVUSDT']
+const binance_valid_coins = ['CRVUSDT', 'RENUSDT', 'PSGUSDT', 'ACMUSDT', 'GALUSDT', 'BARUSDT', 'JUVUSDT', 'CITYUSDT', 'ASRUSDT', 'FORUSDT', 'ATMUSDT', 'OGUSDT']
 const okx_valid_coins = ['CRV-USDT', 'REN-USDT', 'MENGO-USDT', 'CITY-USDT', 'GAL-USDT', 'MENGO-USDT', 'POR-USDT', 'ACM-USDT', 'ARG-USDT', 'TRA-USDT']
 const mercadobitcoin_valid_coins = ['CRV', 'REN', 'GAL']
 const kucoin_valid_coins = ['CRV-USDT', 'REN-USDT', 'GAL-USDT']
@@ -15,7 +14,11 @@ async function getBinanceValues(cryptoName: string, type: 'buy' | 'sell') {
     try {
         console.log('FUNÇÃO GET BINANCE VALUES')
         const binance_values = []
-        let response = await axios.get(`https://api.binance.com/api/v3/depth?symbol=${cryptoName}&limit=1`)
+        let response = await axios.get(`https://api.binance.com/api/v3/depth?symbol=${cryptoName}&limit=1`, {
+            headers: {
+                'X-MBX-APIKEY': 'DAnyPyBeJOhIyC6ntN3hpBo853CpGF2PfMzwADy1fGNDivra1FLI9XscusW5bc95'
+            }
+        })
         console.log('BINANCE API RESPONSE', response)
         if (type === 'buy') {
             binance_values.push(response.data.bids[0][0])
