@@ -93,7 +93,24 @@ export default function Page() {
             const response = await axios.get(`https://api.exchangerate-api.com/v4/latest/USD`)
             setDolarValue(response.data.rates.BRL)
         }
+    }
 
+    function back() {
+        setIsActived(false)
+        setLiberate(false)
+        setBuyBKucoin(false)
+        setBuyBinance(false)
+        setBuyBybit(false)
+        setBuyGateio(false)
+        setBuyMercadoBitcoin(false)
+        setBuyOKX(false)
+
+        setSellBKucoin(false)
+        setSellBinance(false)
+        setSellBybit(false)
+        setSellGateio(false)
+        setSellMercadoBitcoin(false)
+        setSellOKX(false)
     }
 
     if (liberate) {
@@ -102,9 +119,9 @@ export default function Page() {
                 <Navbar />
                 <div className="border-l border-zinc-100 px-4 col-span-2">
                     <div className="flex flex-col gap-4">
-                        <HeaderOperation
-                            dolar={dolarValue}
-                        />
+                        <HeaderOperation dolar={dolarValue}>
+                            <button type="button" onClick={() => back()} className="add-btn mt-4">Procurar outras corretoras</button>
+                        </HeaderOperation>
                         <div className="grid grid-cols-3 gap-6">
                             {Object.keys(comparisons).map((coin, index) => (
                                 <>

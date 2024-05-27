@@ -55,12 +55,15 @@ export function HeaderSell({ children }: HeaderBuyProps) {
 
 interface HeaderOperationProps {
     dolar: string
+    children: ReactNode
+
 }
-export function HeaderOperation({ dolar }: HeaderOperationProps) {
+export function HeaderOperation({ dolar, children }: HeaderOperationProps) {
     return (
-        <div className="flex flex-col gap-0">
+        <div className="flex flex-col items-start gap-0">
             <h3 className="text-white font-bold text-xl">Operações</h3>
             <p className="text-zinc-400 text-sm font-medium">Cotação do Dólar -  R${dolar} </p>
+            {children}
         </div>
     )
 }
