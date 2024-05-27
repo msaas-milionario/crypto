@@ -1,8 +1,6 @@
 import axios from "axios"
 import { NextRequest, NextResponse } from "next/server"
 
-const valid_coins = ['CRV-USDT', 'REN-USDT']
-
 const binance_valid_coins = ['CRVUSDT', 'RENUSDT', 'PSGUSDT', 'ACMUSDT', 'GALUSDT', 'BARUSDT', 'JUVUSDT', 'CITYUSDT', 'ASRUSDT', 'FORUSDT', 'ATMUSDT', 'OGUSDT']
 const okx_valid_coins = ['CRV-USDT', 'REN-USDT', 'MENGO-USDT', 'CITY-USDT', 'GAL-USDT', 'MENGO-USDT', 'POR-USDT', 'ACM-USDT', 'ARG-USDT', 'TRA-USDT']
 const mercadobitcoin_valid_coins = ['CRV', 'REN', 'GAL']

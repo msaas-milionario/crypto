@@ -63,7 +63,7 @@ export function ComparisonBox({ buyExchange, sellExchange, crypto, cryptoImagePa
                 <div className="flex flex-col">
                     <p className="text-zinc-400 text-sm text-left">SPREAD</p>
                     <div className="flex flex-col">
-                        <h4 className="text-emerald-400 text-sm">{spread.replace('-', '')}</h4>
+                        <h4 className="text-emerald-400 text-sm">{spread.replace('-', '').slice(0, 6)} %</h4>
                     </div>
                 </div>
                 {/* <div className="flex flex-col">

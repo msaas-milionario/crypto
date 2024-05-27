@@ -86,7 +86,7 @@ export function ModalOrderBook() {
                                         width={24}
                                         height={24}
                                     />
-                                    <span className="text-white font-bold">{orderBook.buyExchange}</span>
+                                    <span className="text-white font-bold capitalize">{orderBook.buyExchange}</span>
                                 </p>
                             ) : (
                                 <p className="flex gap-2 items-center">
@@ -96,7 +96,7 @@ export function ModalOrderBook() {
                                         width={24}
                                         height={24}
                                     />
-                                    <span className="text-white font-bold">{orderBook.sellExchange === 'mercadoBitcoin' ? 'Mercado Bit.' : orderBook.sellExchange}</span>
+                                    <span className="text-white font-bold capitalize">{orderBook.sellExchange === 'mercadoBitcoin' ? 'Mercado Bit.' : orderBook.sellExchange}</span>
                                 </p>
                             )}
                         </div>

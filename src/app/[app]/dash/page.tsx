@@ -166,15 +166,15 @@ export default function Page() {
                             >Fazer busca</button>
                         </HeaderBuy>
                         <div className="grid grid-cols-2 gap-4">
-                            <div className={`${sellBinance && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
-                                <label htmlFor="buy-binance" className={`absolute left-0 top-0 h-full w-full z-50 ${sellBinance && 'cursor-not-allowed pointer-events-none'}`}>
+                            <div className={`${buyBinance ? 'border-2 border-orange/60' : 'border-normal'} ${sellBinance && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
+                                <label htmlFor="buy-binance" className={`absolute left-0 top-0 h-full w-full z-50 ${sellBinance ? 'cursor-not-allowed pointer-events-none' : 'cursor-pointer'}`}>
                                     <input
                                         checked={buyBinance}
                                         onChange={() => setBuyBinance(!buyBinance)}
                                         name="buy-binance"
                                         type="checkbox"
                                         id="buy-binance"
-                                        className={`absolute right-2 top-2`}
+                                        className={`absolute right-2 top-2 hidden`}
                                     />
                                 </label>
                                 <AddBtn
@@ -182,15 +182,15 @@ export default function Page() {
                                     cryptoText="binance"
                                 />
                             </div>
-                            <div className={`${sellOkx && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
-                                <label htmlFor="buy-okx" className={`absolute left-0 top-0 h-full w-full z-50 ${sellOkx && 'cursor-not-allowed pointer-events-none'}`}>
+                            <div className={`${buyOkX ? 'border-2 border-orange/60' : 'border-normal'}  ${sellOkx && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
+                                <label htmlFor="buy-okx" className={`absolute left-0 top-0 h-full w-full z-50 ${sellOkx ? 'cursor-not-allowed pointer-events-none' : 'cursor-pointer'}`}>
                                     <input
                                         checked={buyOkX}
                                         onChange={() => setBuyOKX(!buyOkX)}
                                         name="buy-okx"
                                         type="checkbox"
                                         id="buy-okx"
-                                        className="absolute right-2 top-2"
+                                        className={`absolute right-2 top-2 hidden`}
                                     />
                                 </label>
                                 <AddBtn
@@ -198,15 +198,15 @@ export default function Page() {
                                     cryptoText="OKX"
                                 />
                             </div>
-                            <div className={`${sellMercadoBitcoin && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
-                                <label htmlFor="buy-mercado" className={`absolute left-0 top-0 h-full w-full z-50 ${sellMercadoBitcoin && 'cursor-not-allowed pointer-events-none'}`}>
+                            <div className={`${buyMercadoBitcoin ? 'border-2 border-orange/60' : 'border-normal'}  ${sellMercadoBitcoin && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
+                                <label htmlFor="buy-mercado" className={`absolute left-0 top-0 h-full w-full z-50 ${sellMercadoBitcoin ? 'cursor-not-allowed pointer-events-none' : 'cursor-pointer'}`}>
                                     <input
                                         checked={buyMercadoBitcoin}
                                         onChange={() => setBuyMercadoBitcoin(!buyMercadoBitcoin)}
                                         name="buy-mercado"
                                         type="checkbox"
                                         id="buy-mercado"
-                                        className="absolute right-2 top-2"
+                                        className={`absolute right-2 top-2 hidden`}
                                     />
                                 </label>
                                 <AddBtn
@@ -214,15 +214,15 @@ export default function Page() {
                                     cryptoText="Mercado Bitcoin"
                                 />
                             </div>
-                            <div className={`${sellKuCoin && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
-                                <label htmlFor="buy-kucoin" className={`absolute left-0 top-0 h-full w-full z-50 ${sellKuCoin && 'cursor-not-allowed pointer-events-none'}`}>
+                            <div className={`${buyKuCoin ? 'border-2 border-orange/60' : 'border-normal'}  ${sellKuCoin && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
+                                <label htmlFor="buy-kucoin" className={`absolute left-0 top-0 h-full w-full z-50 ${sellKuCoin ? 'cursor-not-allowed pointer-events-none' : 'cursor-pointer'}`}>
                                     <input
                                         checked={buyKuCoin}
                                         onChange={() => setBuyBKucoin(!buyKuCoin)}
                                         name="buy-kucoin"
                                         type="checkbox"
                                         id="buy-kucoin"
-                                        className="absolute right-2 top-2"
+                                        className={`absolute right-2 top-2 hidden`}
                                     />
                                 </label>
                                 <AddBtn
@@ -230,15 +230,15 @@ export default function Page() {
                                     cryptoText="KuCoin"
                                 />
                             </div>
-                            <div className={`${sellBybit && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
-                                <label htmlFor="buy-bybit" className={`absolute left-0 top-0 h-full w-full z-50 ${sellBybit && 'cursor-not-allowed pointer-events-none'}`}>
+                            <div className={`${buyBybit ? 'border-2 border-orange/60' : 'border-normal'}  ${sellBybit && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
+                                <label htmlFor="buy-bybit" className={`absolute left-0 top-0 h-full w-full z-50 ${sellBybit ? 'cursor-not-allowed pointer-events-none' : 'cursor-pointer'}`}>
                                     <input
                                         checked={buyBybit}
                                         onChange={() => setBuyBybit(!buyBybit)}
                                         name="buy-bybit"
                                         type="checkbox"
                                         id="buy-bybit"
-                                        className="absolute right-2 top-2"
+                                        className={`absolute right-2 top-2 hidden`}
                                     />
                                 </label>
                                 <AddBtn
@@ -246,15 +246,15 @@ export default function Page() {
                                     cryptoText="ByBit"
                                 />
                             </div>
-                            <div className={`${sellGateio && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
-                                <label htmlFor="buy-gateio" className={`absolute left-0 top-0 h-full w-full z-50 ${sellGateio && 'cursor-not-allowed pointer-events-none'}`}>
+                            <div className={`${buyGateio ? 'border-2 border-orange/60' : 'border-normal'}  ${sellGateio && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
+                                <label htmlFor="buy-gateio" className={`absolute left-0 top-0 h-full w-full z-50 ${sellGateio ? 'cursor-not-allowed pointer-events-none' : 'cursor-pointer'}`}>
                                     <input
                                         checked={buyGateio}
                                         onChange={() => setBuyGateio(!buyGateio)}
                                         name="buy-gateio"
                                         type="checkbox"
                                         id="buy-gateio"
-                                        className="absolute right-2 top-2"
+                                        className={`absolute right-2 top-2 hidden`}
                                     />
                                 </label>
                                 <AddBtn
@@ -274,15 +274,15 @@ export default function Page() {
                     <div className="flex flex-col gap-4">
                         <HeaderSell />
                         <div className="grid grid-cols-2 gap-4">
-                            <div className={`relative col-span-1 h-[52px] exchange-box rounded-md flex items-center ${buyBinance && 'opacity-50 cursor-not-allowed'}`}>
-                                <label htmlFor="sell-binance" className={`absolute left-0 top-0 h-full w-full z-50 ${buyBinance && 'cursor-not-allowed pointer-events-none'}`}>
+                            <div className={`${sellBinance ? 'border-2 border-orange/60' : 'border-normal'}  relative col-span-1 h-[52px] exchange-box rounded-md flex items-center ${buyBinance && 'opacity-50 cursor-not-allowed'}`}>
+                                <label htmlFor="sell-binance" className={`absolute left-0 top-0 h-full w-full z-50 ${buyBinance ? 'cursor-not-allowed pointer-events-none' : 'cursor-pointer'}`}>
                                     <input
                                         checked={sellBinance}
                                         onChange={() => setSellBinance(!sellBinance)}
                                         name="sell-binance"
                                         type="checkbox"
                                         id="sell-binance"
-                                        className="absolute right-2 top-2"
+                                        className={`absolute right-2 top-2 hidden`}
                                     />
                                 </label>
                                 <AddBtn
@@ -290,15 +290,15 @@ export default function Page() {
                                     cryptoText="binance"
                                 />
                             </div>
-                            <div className={`relative col-span-1 h-[52px] exchange-box rounded-md flex items-center ${buyOkX && 'opacity-50 cursor-not-allowed'}`}>
-                                <label htmlFor="sell-okx" className={`absolute left-0 top-0 h-full w-full z-50 ${buyOkX && 'cursor-not-allowed pointer-events-none'}`}>
+                            <div className={`${sellOkx ? 'border-2 border-orange/60' : 'border-normal'}  relative col-span-1 h-[52px] exchange-box rounded-md flex items-center ${buyOkX && 'opacity-50 cursor-not-allowed'}`}>
+                                <label htmlFor="sell-okx" className={`absolute left-0 top-0 h-full w-full z-50 ${buyOkX ? 'cursor-not-allowed pointer-events-none' : 'cursor-pointer'}`}>
                                     <input
                                         checked={sellOkx}
                                         onChange={() => setSellOKX(!sellOkx)}
                                         name="sell-okx"
                                         type="checkbox"
                                         id="sell-okx"
-                                        className="absolute right-2 top-2"
+                                        className={`absolute right-2 top-2 hidden`}
                                     />
                                 </label>
                                 <AddBtn
@@ -306,15 +306,15 @@ export default function Page() {
                                     cryptoText="OKX"
                                 />
                             </div>
-                            <div className={`relative col-span-1 h-[52px] exchange-box rounded-md flex items-center ${buyMercadoBitcoin && 'opacity-50 cursor-not-allowed'}`}>
-                                <label htmlFor="sell-mercado" className={`absolute left-0 top-0 h-full w-full z-50 ${buyMercadoBitcoin && 'cursor-not-allowed pointer-events-none'}`}>
+                            <div className={`${sellMercadoBitcoin ? 'border-2 border-orange/60' : 'border-normal'}  relative col-span-1 h-[52px] exchange-box rounded-md flex items-center ${buyMercadoBitcoin && 'opacity-50 cursor-not-allowed'}`}>
+                                <label htmlFor="sell-mercado" className={`absolute left-0 top-0 h-full w-full z-50 ${buyMercadoBitcoin ? 'cursor-not-allowed pointer-events-none' : 'cursor-pointer'}`}>
                                     <input
                                         checked={sellMercadoBitcoin}
                                         onChange={() => setSellMercadoBitcoin(!sellMercadoBitcoin)}
                                         name="sell-mercado"
                                         type="checkbox"
                                         id="sell-mercado"
-                                        className="absolute right-2 top-2"
+                                        className={`absolute right-2 top-2 hidden`}
                                     />
                                 </label>
                                 <AddBtn
@@ -322,15 +322,15 @@ export default function Page() {
                                     cryptoText="Mercado Bitcoin"
                                 />
                             </div>
-                            <div className={`relative col-span-1 h-[52px] exchange-box rounded-md flex items-center ${buyKuCoin && 'opacity-50 cursor-not-allowed'}`}>
-                                <label htmlFor="sell-kucoin" className={`absolute left-0 top-0 h-full w-full z-50 ${buyKuCoin && 'cursor-not-allowed pointer-events-none'}`}>
+                            <div className={`${sellKuCoin ? 'border-2 border-orange/60' : 'border-normal'}  relative col-span-1 h-[52px] exchange-box rounded-md flex items-center ${buyKuCoin && 'opacity-50 cursor-not-allowed'}`}>
+                                <label htmlFor="sell-kucoin" className={`absolute left-0 top-0 h-full w-full z-50 ${buyKuCoin ? 'cursor-not-allowed pointer-events-none' : 'cursor-pointer'}`}>
                                     <input
                                         checked={sellKuCoin}
                                         onChange={() => setSellBKucoin(!sellKuCoin)}
                                         name="sell-kucoin"
                                         type="checkbox"
                                         id="sell-kucoin"
-                                        className="absolute right-2 top-2"
+                                        className={`absolute right-2 top-2 hidden`}
                                     />
                                 </label>
                                 <AddBtn
@@ -338,15 +338,15 @@ export default function Page() {
                                     cryptoText="KuCoin"
                                 />
                             </div>
-                            <div className={`${buyBybit && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
-                                <label htmlFor="sell-bybit" className={`absolute left-0 top-0 h-full w-full z-50 ${buyBybit && 'cursor-not-allowed pointer-events-none'}`}>
+                            <div className={`${sellBybit ? 'border-2 border-orange/60' : 'border-normal'}  ${buyBybit && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
+                                <label htmlFor="sell-bybit" className={`absolute left-0 top-0 h-full w-full z-50 ${buyBybit ? 'cursor-not-allowed pointer-events-none' : 'cursor-pointer'}`}>
                                     <input
                                         checked={sellBybit}
                                         onChange={() => setSellBybit(!sellBybit)}
                                         name="sell-bybit"
                                         type="checkbox"
                                         id="sell-bybit"
-                                        className="absolute right-2 top-2"
+                                        className={`absolute right-2 top-2 hidden`}
                                     />
                                 </label>
                                 <AddBtn
@@ -354,15 +354,15 @@ export default function Page() {
                                     cryptoText="ByBit"
                                 />
                             </div>
-                            <div className={`${buyGateio && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
-                                <label htmlFor="sell-gateio" className={`absolute left-0 top-0 h-full w-full z-50 ${buyGateio && 'cursor-not-allowed pointer-events-none'}`}>
+                            <div className={`${sellGateio ? 'border-2 border-orange/60' : 'border-normal'}  ${buyGateio && 'opacity-50 hover:cursor-not-allowed'} relative col-span-1 h-[52px] exchange-box rounded-md flex items-center`}>
+                                <label htmlFor="sell-gateio" className={`absolute left-0 top-0 h-full w-full z-50 ${buyGateio ? 'cursor-not-allowed pointer-events-none' : 'cursor-pointer'}`}>
                                     <input
                                         checked={sellGateio}
                                         onChange={() => setSellGateio(!sellGateio)}
                                         name="sell-gateio"
                                         type="checkbox"
                                         id="sell-gateio"
-                                        className="absolute right-2 top-2"
+                                        className={`absolute right-2 top-2 hidden`}
                                     />
                                 </label>
                                 <AddBtn

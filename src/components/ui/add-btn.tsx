@@ -17,7 +17,7 @@ export function AddBtn({ cryptoText, imagePath }: AddBtnProps) {
                 height={32}
                 className="absolute left-4"
             />
-            <span className="ps-16 text-white">{cryptoText}</span>
+            <span className="ps-16 text-white capitalize">{cryptoText}</span>
         </>
     )
 }

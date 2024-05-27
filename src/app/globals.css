@@ -15,10 +15,12 @@
 }
 
 .exchange-box {
-    border: 1px solid rgba(242, 242, 242, 0.20);
     background: linear-gradient(142deg, rgba(255, 255, 255, 0.30) -11.31%, rgba(255, 255, 255, 0.02) 59.86%);
     box-shadow: 0px 4px 24px -1px rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(5px);
+}
+.border-normal {
+    border: 1px solid rgba(242, 242, 242, 0.20);
 }
 
 /* .bg-img {
