@@ -30,7 +30,7 @@ export default function Page() {
         setLoading(true)
         setError('')
         // https://crypto-jade-nine.vercel.app
-        await axios.post('https://crypto-jade-nine.vercel.app/api/login', data, {
+        await axios.post('https://app.arbitfy.com.br/api/login', data, {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
