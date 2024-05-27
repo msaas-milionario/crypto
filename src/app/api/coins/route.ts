@@ -12,21 +12,18 @@ const gateio_valid_coins = ['REN_USDT', 'CRV_USDT', 'PSG_USDT', 'ACM_USDT', 'MEN
 
 async function getBinanceValues(cryptoName: string, type: 'buy' | 'sell') {
     try {
-        console.log('FUNÇÃO GET BINANCE VALUES')
         const binance_values = []
         let response = await axios.get(`https://api.binance.com/api/v3/depth?symbol=${cryptoName}&limit=1`, {
             headers: {
                 'X-MBX-APIKEY': 'DAnyPyBeJOhIyC6ntN3hpBo853CpGF2PfMzwADy1fGNDivra1FLI9XscusW5bc95'
             }
         })
-        console.log('BINANCE API RESPONSE', response)
         if (type === 'buy') {
             binance_values.push(response.data.bids[0][0])
         } else {
             binance_values.push(response.data.asks[0][0])
         }
         
-        console.log('BINANCE VALUES', binance_values)
         return binance_values
     } catch (e) {
         console.log(e)
