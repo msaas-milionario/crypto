@@ -4,6 +4,8 @@ import React, { FormEvent, SetStateAction, useContext, useEffect, useState } fro
 import { modalContext } from "../context/modal"
 import axios from "axios"
 
+type Exchanges = 'binance' | 'mercadoBitcoin' | 'okx' | 'kuCoin' | 'bybit' | 'gateio';
+
 interface modalProps {
     buyBinance: boolean
     buyOkX: boolean
@@ -25,7 +27,7 @@ interface modalProps {
 }
 
 interface ExchangeValue {
-    exchange: string;
+    exchange: Exchanges;
     value: number;
 }
 
@@ -45,8 +47,8 @@ interface ExchangeData {
 
 interface FormattedData {
     [coin: string]: {
-        buy: { exchange: string; value: number }[];
-        sell: { exchange: string; value: number }[];
+        buy: { exchange: Exchanges; value: number }[];
+        sell: { exchange: Exchanges; value: number }[];
     };
 }
 
@@ -97,7 +99,7 @@ export function Modal({ buyBinance, loading, setLoading, buyKuCoin, buyMercadoBi
             return coin.substring(0, 3);
         };
 
-        Object.keys(data).forEach(exchange => {
+        Object.keys(data).forEach((exchange: Exchanges) => {
             data[exchange].forEach(entry => {
                 const baseCoin = getBaseCoin(entry.coin);
                 if (!comparisons[baseCoin]) {
