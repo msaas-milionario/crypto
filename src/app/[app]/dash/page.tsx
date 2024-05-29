@@ -272,7 +272,10 @@ export default function Page() {
                 </div>
                 <div className="px-4">
                     <div className="flex flex-col gap-4">
-                        <HeaderSell />
+                        <HeaderSell
+                            search={search}
+                            setSearch={setSearch}
+                        />
                         <div className="grid grid-cols-2 gap-4">
                             <div className={`${sellBinance ? 'border-2 border-orange/60' : 'border-normal'}  relative col-span-1 h-[52px] exchange-box rounded-md flex items-center ${buyBinance && 'opacity-50 cursor-not-allowed'}`}>
                                 <label htmlFor="sell-binance" className={`absolute left-0 top-0 h-full w-full z-50 ${buyBinance ? 'cursor-not-allowed pointer-events-none' : 'cursor-pointer'}`}>
