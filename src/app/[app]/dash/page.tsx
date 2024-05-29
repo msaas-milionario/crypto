@@ -10,21 +10,10 @@ import { ModalOrderBook } from "@/components/ui/modal-order-book";
 import axios from "axios";
 import { FormEvent, useContext, useEffect, useState } from "react";
 
-interface ExchangeData {
-    coin: string;
-    type: 'buy' | 'sell';
-    value: string[];
-}
-
-interface FormattedData {
-    [coin: string]: {
-        buy: { exchange: string; value: number }[];
-        sell: { exchange: string; value: number }[];
-    };
-}
+type Exchanges = 'binance' | 'mercadoBitcoin' | 'okx' | 'kuCoin' | 'bybit' | 'gateio';
 
 interface ExchangeValue {
-    exchange: string;
+    exchange: Exchanges;
     value: number;
 }
 
@@ -113,6 +102,14 @@ export default function Page() {
         setSellOKX(false)
     }
 
+    function calculateSpreadPercentage(bid: number, ask: number): string {
+        const spread = ask - bid;
+        return `${(spread / ask).toFixed(2)}`
+    }
+
+    const [search, setSearch] = useState<string>('')
+    const [searhClients, setSearchClients] = useState<Exchanges | ''>('')
+
     if (liberate) {
         return (
             <div className="grid grid-cols-my min-h-[524px] overflosw-y-scroll">
@@ -139,7 +136,7 @@ export default function Page() {
                                                     exchange: buy.exchange,
                                                     value: formatCurrency(buy.exchange === 'mercadoBitcoin' ? buy.value / Number(dolarValue) : buy.value),
                                                 }}
-                                                spread={`${buy.value - sell.value}`}
+                                                spread={calculateSpreadPercentage(buy.value, sell.value)}
                                             />
                                         ))
                                     ))}
@@ -158,7 +155,10 @@ export default function Page() {
                 <Navbar />
                 <div className="border-x border-zinc-100 px-4">
                     <div className="flex flex-col gap-4">
-                        <HeaderBuy>
+                        <HeaderBuy
+                            search={search}
+                            setSearch={setSearch}
+                        >
                             <button
                                 onClick={() => confirmOperation()}
                                 type="button"

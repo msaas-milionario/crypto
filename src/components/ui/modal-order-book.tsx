@@ -11,6 +11,8 @@ export function ModalOrderBook() {
     const [buyOrderBook, setBuyOrderBook] = useState<[]>([])
     const [sellOrderBook, setSellOrderBook] = useState<[]>([])
     const [currentOrderBook, setCurrentOrderBook] = useState<[]>([])
+    const [dolarValue, setDolarValue] = useState()
+
 
     async function getOrderBook() {
         setBuyOrderBook([])
@@ -22,6 +24,8 @@ export function ModalOrderBook() {
             exchange = orderBook.sellExchange
         }
 
+        const response = await axios.get(`https://api.exchangerate-api.com/v4/latest/USD`)
+        setDolarValue(response.data.rates.BRL)
         await axios.post('https://app.arbitfy.com.br/api/get-order-book', JSON.stringify({ exchange, type: type === 'buy' ? 'sell' : 'buy', crypto: orderBook.token }))
             .then(res => {
                 if (type === 'buy') {
@@ -81,7 +85,7 @@ export function ModalOrderBook() {
                             {type === 'buy' ? (
                                 <p className="flex gap-2 items-center">
                                     <Image
-                                        src={`/images/exchanges/${orderBook.buyExchange}.png`}
+                                        src={`/images/exchanges/${orderBook.buyExchange === 'mercadoBitcoin' ? 'mb' : orderBook.sellExchange}.png`}
                                         alt={`${crypto}`}
                                         width={24}
                                         height={24}
@@ -109,11 +113,31 @@ export function ModalOrderBook() {
                     <div className="relative flex flex-col h-[204px]">
                         {currentOrderBook.length > 0 ? (
                             <>
-                                {currentOrderBook.slice(0,5).map((item, index) => (
+                                {currentOrderBook.slice(0, 5).map((item, index) => (
                                     <div key={index} className={`grid grid-cols-3 px-4 py-2 text-center text-zinc-400 ${index % 2 === 0 && 'bg-zinc-700 border-y border-zinc-600'}`}>
-                                        <p>$ {Number(item[0]).toFixed(2)}</p>
+                                        {type === 'buy' && (
+                                            <>
+                                                {orderBook.buyExchange === 'mercadoBitcoin' ? (
+                                                    <span>$ {(item[0] / Number(dolarValue)).toFixed(5)}</span>
+                                                ) : (
+                                                    <p>$ {Number(item[0]).toFixed(5)}</p>
+
+                                                )}
+                                            </>
+                                        )}
+                                        {type === 'sell' && (
+                                            <>
+                                                {orderBook.sellExchange === 'mercadoBitcoin' ? (
+                                                    <span>$ {Number(item[0]).toFixed(5)}</span>
+                                                ) : (
+                                                    <p>$ {Number(item[0]).toFixed(5)}</p>
+
+                                                )}
+                                            </>
+                                        )}
                                         <p>{Math.round(item[1]).toLocaleString('pt-br')}</p>
-                                        <p>$ {Math.round(item[1] * item[1])}</p>
+                                        {/* {console.log(item[])} */}
+                                        <p>$ {Math.round(item[0] * item[1])}</p>
                                     </div>
                                 ))}
                             </>

@@ -47,9 +47,9 @@ async function getOKXValues(cryptoName: string, type: 'buy' | 'sell') {
         const binance_values = []
         let response = await axios.get(`https://www.okx.com/api/v5/market/books?instId=${cryptoName}&sz=10`)
         if (type === 'buy') {
-            binance_values.push(response.data.data[0].bids.slice(0,5))
+            binance_values.push(response.data.data[0].bids.slice(0, 5))
         } else {
-            binance_values.push(response.data.data[0].asks.slice(0,5))
+            binance_values.push(response.data.data[0].asks.slice(0, 5))
         }
 
         return binance_values
@@ -77,11 +77,11 @@ async function getBybitValues(cryptoName: string, type: 'buy' | 'sell') {
     // FAZER TRATAMENTO DE DADOS
     if (type === 'buy') {
         let array: string[][] = []
-        response.data.result.map((item: { symbol: string, price: string, side: string, size: number}) => item.side === 'Buy' ? array.push([item.price, `${item.size}`]) : '')
+        response.data.result.map((item: { symbol: string, price: string, side: string, size: number }) => item.side === 'Buy' ? array.push([item.price, `${item.size}`]) : '')
         bybit_values.push(array.slice(0, 10))
     } else {
         let array: string[][] = []
-        response.data.result.map((item: { symbol: string, price: string, side: string, size: number}) => item.side === 'Sell' ? array.push([item.price, `${item.size}`]) : '')
+        response.data.result.map((item: { symbol: string, price: string, side: string, size: number }) => item.side === 'Sell' ? array.push([item.price, `${item.size}`]) : '')
         bybit_values.push(array.slice(0, 10))
     }
     return bybit_values
@@ -105,6 +105,10 @@ function getCorrectCrypto(exchange: string, crypto: string) {
     let position
     if (exchange === 'binance') {
         position = binance_valid_coins.findIndex(currency => currency.includes(crypto))
+    } else if (exchange === 'mercadoBitcoin') {
+        position = mercadobitcoin_valid_coins.findIndex(currency => currency.includes(crypto))
+    } else if (exchange === 'bybit') {
+        position = bybit_valid_coins.findIndex(currency => currency.includes(crypto))
     }
 
     if (typeof position === 'undefined') return 0
@@ -142,6 +146,7 @@ export async function POST(request: Request, context: any) {
     if (data.exchange === 'mercadoBitcoin') {
         let correctCrypto = 0
         correctCrypto = getCorrectCrypto(data.exchange, data.crypto)
+        // console.log(correctCrypto)
         if (data.type === 'buy') {
             // Puxar order book de venda da data.crypto
             orderBook = await getMercadoBitcoinValues(mercadobitcoin_valid_coins[correctCrypto], 'sell')

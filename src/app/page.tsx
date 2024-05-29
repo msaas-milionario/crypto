@@ -1,12 +1,14 @@
-import Link from "next/link";
+'use client'
+
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 
 export default function Page() {
-  return (
-    <div className="h-screen w-full flex items-center justify-center">
-      <div className="flex gap-4">
-        <Link href="/usuario/entrar">Entrar</Link>
-        <Link href="/usuario/registrar">Registrar</Link>
-      </div>
-    </div>
-  )
+    const router = useRouter()
+    useEffect(() => {
+        router.push('/usuario/entrar')
+    }, [])
+    return (
+        <div className="bg-zinc-950"></div>
+    )
 }

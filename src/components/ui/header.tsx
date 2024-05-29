@@ -1,11 +1,13 @@
 import Image from "next/image"
-import { ReactNode } from "react"
+import { ReactNode, SetStateAction } from "react"
 
 interface HeaderBuyProps {
     children?: ReactNode
+    search: string
+    setSearch: React.Dispatch<SetStateAction<string>>
 }
 
-export function HeaderBuy({ children }: HeaderBuyProps) {
+export function HeaderBuy({ children, search, setSearch }: HeaderBuyProps) {
     return (
         <div className="flex flex-col gap-6">
             <div className="flex items-center justify-between gap-8">
@@ -14,6 +16,7 @@ export function HeaderBuy({ children }: HeaderBuyProps) {
             </div>
             <div className="relative">
                 <input type="text"
+                    onChange={(e) => setSearch(e.target.value)}
                     className="inpt-search"
                     placeholder="Buscar..."
                 />
