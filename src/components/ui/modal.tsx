@@ -52,6 +52,15 @@ interface FormattedData {
     };
 }
 
+const exchangeMap: Record<string, Exchanges> = {
+    binance: 'binance',
+    mercadoBitcoin: 'mercadoBitcoin',
+    okx: 'okx',
+    kuCoin: 'kuCoin',
+    bybit: 'bybit',
+    gateio: 'gateio'
+};
+
 const binance_valid_coins = ['CRVUSDT', 'RENUSDT', 'PSGUSDT', 'ACMUSDT', 'GALUSDT', 'BARUSDT', 'JUVUSDT', 'CITYUSDT', 'ASRUSDT', 'FORUSDT', 'ATMUSDT', 'OGUSDT']
 const okx_valid_coins = ['CRV-USDT', 'REN-USDT', 'MENGO-USDT', 'CITY-USDT', 'GAL-USDT', 'MENGO-USDT', 'POR-USDT', 'ACM-USDT', 'ARG-USDT', 'TRA-USDT']
 const mercadobitcoin_valid_coins = ['CRV', 'REN', 'GAL']
@@ -99,13 +108,13 @@ export function Modal({ buyBinance, loading, setLoading, buyKuCoin, buyMercadoBi
             return coin.substring(0, 3);
         };
 
-        Object.keys(data).forEach((exchange: Exchanges) => {
+        Object.keys(data).forEach((exchange) => {
             data[exchange].forEach(entry => {
                 const baseCoin = getBaseCoin(entry.coin);
                 if (!comparisons[baseCoin]) {
                     comparisons[baseCoin] = { buy: [], sell: [] };
                 }
-                comparisons[baseCoin][entry.type].push({ exchange, value: parseFloat(entry.value[0]) });
+                comparisons[baseCoin][entry.type].push({ exchange: exchangeMap[exchange], value: parseFloat(entry.value[0]) });
             });
         });
 
