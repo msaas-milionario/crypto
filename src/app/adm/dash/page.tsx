@@ -28,7 +28,7 @@ export default async function Page() {
     const data = await getData()
 
     if (!data?.success) {
-        return <></>
+        return <>Acesso negado</>
     }
 
     return (
