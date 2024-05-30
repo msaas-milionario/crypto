@@ -85,7 +85,7 @@ export function ModalOrderBook() {
                             {type === 'buy' ? (
                                 <p className="flex gap-2 items-center">
                                     <Image
-                                        src={`/images/exchanges/${orderBook.buyExchange === 'mercadoBitcoin' ? 'mb' : orderBook.sellExchange}.png`}
+                                        src={`/images/exchanges/${orderBook.buyExchange === 'mercadoBitcoin' ? 'mb' : orderBook.buyExchange}.png`}
                                         alt={`${crypto}`}
                                         width={24}
                                         height={24}
