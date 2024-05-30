@@ -28,7 +28,7 @@ export default function Page() {
 
     async function formSubmited({ password, email }: admLoginType) {
         setError('')
-        await axios.post('http://localhost:3000/api/f0fde595-6d77-479a-97f4-246d148eaad4', { password, email }, {
+        await axios.post('https://app.arbitfy.com.br/api/f0fde595-6d77-479a-97f4-246d148eaad4', { password, email }, {
             headers: {
                 "Accept": "application/json",
                 "Content-type": "application/json",
