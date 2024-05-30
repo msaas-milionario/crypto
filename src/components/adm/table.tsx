@@ -128,7 +128,7 @@ export function Table({ users }: TableProps) {
                 <div key={index} className="relative grid grid-cols-5 items-center gap-4 text-zinc-300 font-semibold border-b border-zinc-400 px-4 py-6">
                     <p>{user.name}</p>
                     <p className="col-span-2">{user.email}</p>
-                    <p>{user.status ? 'Ativo' : 'Desativado'}</p>
+                    {/* <p>{user.status ? 'Ativo' : 'Desativado'}</p> */}
                     <div className="">
                         <button onClick={() => {
                             if (index === modal) {
