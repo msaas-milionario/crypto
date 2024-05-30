@@ -128,7 +128,7 @@ export function ModalOrderBook() {
                                         {type === 'sell' && (
                                             <>
                                                 {orderBook.sellExchange === 'mercadoBitcoin' ? (
-                                                    <span>$ {Number(item[0]).toFixed(5)}</span>
+                                                    <span>$ {(item[0] / Number(dolarValue)).toFixed(5)}</span>
                                                 ) : (
                                                     <p>$ {Number(item[0]).toFixed(5)}</p>
 

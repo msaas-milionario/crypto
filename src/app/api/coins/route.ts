@@ -6,7 +6,7 @@ const okx_valid_coins = ['CRV-USDT', 'REN-USDT', 'MENGO-USDT', 'CITY-USDT', 'GAL
 const mercadobitcoin_valid_coins = ['CRV', 'REN', 'GAL']
 const kucoin_valid_coins = ['CRV-USDT', 'REN-USDT', 'GAL-USDT']
 const bybit_valid_coins = ['RENUSDT', 'GALUSDT', 'OGUSDT']
-const gateio_valid_coins = ['REN_USDT', 'CRV_USDT', 'PSG_USDT', 'ACM_USDT', 'MENGO_USDT', 'POR_USDT', 'AFC_USDT', 'GAL_USDT', 'ALA_USDT', 'JUV_USDT', 'SCCP_USDT', 'CITY_USDT', 'GOZ_USDT', 'TRA_USDT', 'ARG_USDT', 'NAP_USDT', 'ASR_USDT', 'AM_USDT', 'INTER_USDT', 'ITA_USDT', 'ASM_USDT', 'FOR_USDT', 'IBFK_USDT', 'ATM_USDT', 'SPFC_USDT', 'OG_USDT', 'GALO_USDT', 'SAUBER_USDT']
+const gateio_valid_coins = ['REN_USDT', 'CRV_USDT', 'PSG_USDT', 'ACM_USDT', 'MENGO_USDT', 'POR_USDT', 'GAL_USDT', 'JUV_USDT', 'CITY_USDT', 'TRA_USDT', 'ARG_USDT', 'ASR_USDT', 'FOR_USDT', 'OG_USDT']
 
 async function getBinanceValues(cryptoName: string, type: 'buy' | 'sell') {
     try {

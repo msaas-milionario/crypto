@@ -7,6 +7,7 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import Image from 'next/image'
+import { setCookie } from 'nookies'
 
 // 8fa261d1201946bcbc5fc8fd31c82d98
 
@@ -26,6 +27,7 @@ export default function Page() {
     })
 
     async function formSubmited({ password, email }: admLoginType) {
+        setError('')
         await axios.post('http://localhost:3000/api/f0fde595-6d77-479a-97f4-246d148eaad4', { password, email }, {
             headers: {
                 "Accept": "application/json",
@@ -34,8 +36,15 @@ export default function Page() {
         })
             .then(res => {
                 const response = res.data
+                console.log(response)
                 if (response.success) {
+                    setCookie(null, 'arbitfy', JSON.stringify(response.user), {
+                        path: '/',
+                        sameSite: true,
+                    })
+
                     router.push('/adm/dash')
+
                     return
                 }
                 setError(response.message)
@@ -63,7 +72,7 @@ export default function Page() {
                     {...register('email')}
                 />
                 <input
-                    type="text"
+                    type="password"
                     className="py-2 inpt"
                     {...register('password')}
                 />

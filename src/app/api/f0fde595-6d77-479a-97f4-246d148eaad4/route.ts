@@ -3,6 +3,12 @@ import { z } from 'zod'
 import { compare } from 'bcryptjs'
 import User from '@/models/User'
 
+interface UserProps {
+    name: string
+    email: string,
+    status: boolean
+}
+
 const admLogin = z.object({
     email: z.string(),
     // password: z.string().min(31)
@@ -27,7 +33,6 @@ export async function POST(request: Request, context: any) {
             message: 'Unauthorized'
         })
     }
-
     const doesPasswordMatches = await compare(password, doesUserExists.password_hash)
     
     if (!doesPasswordMatches) {
@@ -47,10 +52,17 @@ export async function POST(request: Request, context: any) {
 export async function GET(request: Request, context: any) {
     const users = await User.find()
 
-    console.log(users)
+    const newUsers: UserProps[] = []
+    users.map((user, index) => {
+        newUsers.push({
+            name: user.name,
+            email: user.email,
+            status: user.status
+        })
+    }, [])
 
     return NextResponse.json({
-        
+        users: newUsers
     })
 }
 

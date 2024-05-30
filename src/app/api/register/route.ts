@@ -33,7 +33,8 @@ export async function POST(request: Request, context: any) {
         const newUser = new User({
             name,
             email,
-            password_hash
+            password_hash,
+            status: true
         })
     
         await newUser.save()
@@ -42,7 +43,8 @@ export async function POST(request: Request, context: any) {
             success: true,
             user: {
                 email: newUser.email,
-                name: newUser.name
+                name: newUser.name,
+                status: newUser.status
             }
         })
     } catch(e) {

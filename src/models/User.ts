@@ -13,6 +13,10 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    status: {
+        type: Boolean,
+        required: true
+    }
 })
 
 const User = mongoose.models.users   || mongoose.model('users', postSchema)

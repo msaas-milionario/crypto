@@ -84,6 +84,7 @@ export default function Page() {
                         {...register('email')}
                         type="text"
                         className="inpt"
+                        placeholder="exemplo@gmail.com"
                     />
                 </FormControl>
                 <FormControl
@@ -93,6 +94,7 @@ export default function Page() {
                         {...register('password')}
                         type="password"
                         className="inpt"
+                        placeholder="******"
                     />
                 </FormControl>
                 <button className="font-bold py-3 text-center flex justify-center rounded-lg bg-orange text-white">
