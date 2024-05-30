@@ -158,7 +158,7 @@ export function Modal({ buyBinance, loading, setLoading, buyKuCoin, buyMercadoBi
         // })
         document.querySelector("#black-bg")?.classList.add('pointer-events-none')
         // https://app.arbitfy.com.br'
-        await axios.post('http://localhost:3001/api/coins', JSON.stringify(data))
+        await axios.post('https://app.arbitfy.com.br/api/coins', JSON.stringify(data))
             .then(res => {
                 if (res.status === 200) {
                     setLiberate(true)
