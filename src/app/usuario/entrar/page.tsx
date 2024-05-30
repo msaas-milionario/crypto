@@ -30,7 +30,7 @@ export default function Page() {
         setLoading(true)
         setError('')
         // https://crypto-jade-nine.vercel.app
-        await axios.post('https://arbitfy.com.br/api/login', data, {
+        await axios.post('http://localhost:3000/api/login', data, {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
@@ -39,7 +39,6 @@ export default function Page() {
             .then(res => {
                 const response = res.data
                 setLoading(false)
-                console.log(response)
                 if (response.error) {
                     setError(response.error)
                     return
@@ -50,7 +49,6 @@ export default function Page() {
                     path: '/',
                 })
                 router.push("/app/dash")
-
             }).catch(e => console.log(e))
     }
 

@@ -15,6 +15,8 @@ export async function POST(request: Request, context: any) {
 
     const doesUserExists = await User.findOne({ email })
 
+    console.log(doesUserExists)
+
     if (doesUserExists === null) {
         return NextResponse.json({
             error: "Email ou senha inválidos."

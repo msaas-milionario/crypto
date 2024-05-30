@@ -30,7 +30,7 @@ export default function Page() {
     async function formSubmited(data: registerSchemaType) {
         setLoading(true)
         setError('')
-        await axios.post('https://app.arbitfy.com.br/api/register', data, {
+        await axios.post('http://localhost:3000/api/register', data, {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
@@ -38,7 +38,6 @@ export default function Page() {
         }).then(res => {
             const response = res.data
             setLoading(false)
-
             if (response.error) {
                 setError(response.error)
                 return
