@@ -121,7 +121,7 @@ export function Table({ users }: TableProps) {
             <div className="grid grid-cols-5 gap-4 text-zinc-300 font-semibold border-b border-zinc-400 px-4 py-6">
                 <p>Name</p>
                 <p className="col-span-2">Email</p>
-                <p>Status</p>
+                {/* <p>Status</p> */}
                 <p>Ação</p>
             </div>
             {tableData.filter(user => user.name !== 'adm login').map((user, index) => (
