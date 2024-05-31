@@ -131,13 +131,16 @@ export function ModalOrderBook() {
                                                     <span>$ {(item[0] / Number(dolarValue)).toFixed(5)}</span>
                                                 ) : (
                                                     <p>$ {Number(item[0]).toFixed(5)}</p>
-
                                                 )}
                                             </>
                                         )}
                                         <p>{Math.round(item[1]).toLocaleString('pt-br')}</p>
                                         {/* {console.log(item[])} */}
-                                        <p>$ {Math.round(item[0] * item[1])}</p>
+                                        {orderBook.sellExchange === 'mercadoBitcoin' ? (
+                                            <p>$ {(item[0] / Number(dolarValue) * item[1])}</p>
+                                        ): (
+                                            <p>$ {Math.round(item[0] * item[1])}</p>
+                                        )}
                                     </div>
                                 ))}
                             </>
